@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Notify Example</title>
+
+    <!------- Loading JS scripts ------->
+    <!-- When loading JS scripts, considerations should be made regarding when
+         the DOM is being loaded, and when different scripts 
+         depend on each other. Below are examples of a few different ways to load the scripts.
+
+     -->
+
+    <!-- Load any CSS before the JS in case you need to access styles in your scripts. -->
+
+    <link rel="stylesheet" type="text/css" href="notify.css" />
+
+    <script defer type="text/javascript" src="Notify.js"></script>
+    <script defer type="text/javascript" src="examples.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Notify</h1>
+      <h2>A simple way to communicate music through the web!</h2>
+    </div>
+    <h2>Documentation</h2>
+    <a href="./documentation.html">Documentation</a>
+    <h2>Write music!</h2>
+    <p>
+      Select on a note on the staff and change the pitch/time value of the notes
+      through the UI. You can also change the time signature of the staff and
+      the notes will be adjusted accordingly. Add and remove as many bars as you
+      need, the staff will add/remove rows for the bars. Try editing the staff below.
+    </p>
+
+
+    <div id="staff1"></div>
+
+    <h2>Play it!</h2>
+    <p>Now that you've written some music on the staff, click the "Play from Start"
+      button in the UI to play the notes! By default, the speed is 120 BPM for a quarter
+      note, but you can adjust the speed as you need.
+    </p>
+
+
+    <h2>Hide the UI</h2>
+    <p>
+      You can also choose to hide the UI if needed! Here is an instance of the
+      library without the UI. You can still select notes to play it and get data
+      of it. Try selecting a note below and press the "Show Note" button to see 
+      which note you pressed in the console.
+    </p>
+    <div id="staff2"></div>
+    <button id="staff2getNote">Show Note</button>
+    <h3>Press the button to view the staff's notes on the console!</h3>
+
+    <h2>Get some data!</h2>
+    <p>You can get the data of the notes on the staff. Press the "VIEW STAFF" 
+      button to get all of the notes in the staff as an array
+    </p>
+
+    <button id="staff2button">VIEW STAFF</button>
+  </body>
+</html>

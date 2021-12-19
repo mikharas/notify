@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Notify</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="assets/bass.css" rel="stylesheet" />
+    <link href="assets/style.css" rel="stylesheet" />
+    <link href="assets/github.css" rel="stylesheet" />
+    <link href="assets/split.css" rel="stylesheet" />
+  </head>
+  <body class="documentation m0">
+    <div class="flex">
+      <div id="split-left" class="overflow-auto fs0 height-viewport-100">
+        <div class="py1 px2">
+          <h3 class="mb0 no-anchor"></h3>
+          <div class="mb1"><code></code></div>
+          <input
+            placeholder="Filter"
+            id="filter-input"
+            class="col12 block input"
+            spellcheck="false"
+            autocapitalize="off"
+            autocorrect="off"
+            type="text"
+          />
+          <div id="toc">
+            <ul class="list-reset h5 py1-ul">
+              <li><a href="#createstaff" class=""> createStaff </a></li>
+
+              <li><a href="#getstaffelement" class=""> getStaffElement </a></li>
+
+              <li><a href="#getselectednote" class=""> getSelectedNote </a></li>
+
+              <li><a href="#getallnotes" class=""> getAllNotes </a></li>
+
+              <li><a href="#getstaffobject" class=""> getStaffObject </a></li>
+
+              <li><a href="#changenotepitch" class=""> changeNotePitch </a></li>
+
+              <li>
+                <a href="#changenotetimevalue" class="">
+                  changeNoteTimeValue
+                </a>
+              </li>
+
+              <li>
+                <a href="#changeplaybackspeed" class="">
+                  changePlayBackSpeed
+                </a>
+              </li>
+
+              <li>
+                <a href="#changetimesignature" class="">
+                  changeTimeSignature
+                </a>
+              </li>
+
+              <li><a href="#addbar" class=""> addBar </a></li>
+
+              <li><a href="#removebar" class=""> removeBar </a></li>
+
+              <li><a href="#playnote" class=""> playNote </a></li>
+
+              <li><a href="#playbar" class=""> playBar </a></li>
+
+              <li><a href="#playstaff" class=""> playStaff </a></li>
+            </ul>
+          </div>
+          <div class="mt1 h6 quiet">
+            <a href="https://documentation.js.org/reading-documentation.html"
+              >Need help reading this?</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="split-right" class="relative overflow-auto height-viewport-100">
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="createstaff">Getting started</h3>
+          </div>
+
+          <p>
+            Notify is a library that can notate and play music easily on the
+            web. To use the library, include the notify.css file in your html
+            and also Notify.js as a script.
+          </p>
+
+          <h4>Initializing a staff</h4>
+          <p>Here is an example on how to initialize a staff.</p>
+          <div class="pre p1 fill-light mt0">
+            const staff1 = new Notify(); <br />
+            const staffEl = staff1.createStaff("TREBLE", "QUARTER", 4); <br />
+          </div>
+          <p>
+            <code>staffEl</code> contains the html element of the staff. You can
+            now put it in your application through
+            <code>.appendChild(staffEl)</code>
+          </p>
+
+          <h4>Adding/Changing/Deleting Notes</h4>
+          <p>
+            Once you create a staff, it will by default have one bar in the
+            staff. Empty bars will be filled with rest notes. To "add" a note,
+            you can modify the rest note through this API:
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            staff1.changeNoteTimeValue(0, 0, "QUARTER"); <br />
+            staff1.changeNotePitch(0, 0, "G4"); <br />
+            staff1.changeNotePitch(0, 0, null); <br />
+          </div>
+          <p>
+            "Deleting notes" would just be changing the note's pitch value to
+            <code>null</code>
+          </p>
+          <h4>Adding/removing bars</h4>
+          <p>
+            You can add and remove a bar from the end of the staff like this:
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            staff1.addBar(); <br />
+            staff1.removeBar(); <br />
+          </div>
+
+          <h4>Getting data</h4>
+          <p>
+            To get data on the notes that have been added to the staff, use the
+            following API:
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            staff1.getAllNotes(); <br />
+            staff1.getSelectedNote(); <br />
+          </div>
+          <p>
+            <code>getSelectedNote</code> will return the data of the currently
+            selected note on the staff and <code>getAllNotes</code> will return
+            the data of all of the notes.
+          </p>
+          <h4>Playing Sound</h4>
+          <p>
+            To play the sound of a note/bar/staff, use the following API: 
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            staff1.playNote(); <br />
+            staff1.playBar(0); <br />
+            staff1.playStaff(0); <br />
+          </div>
+        </section>
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="createstaff">createStaff</h3>
+          </div>
+
+          <p>
+            Create a staff with clef, beat duration (QUARTER, HALF), and beat
+            count (number of beats in a bar)
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            createStaff(clef:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, noteDuration:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, noteCount:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, editable:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+              >boolean</a
+            >):
+            <a href="https://developer.mozilla.org/docs/Web/API/Element"
+              >element</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">clef</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                The clef that you want to use in all capital letters for the
+                staff. Note that library currently only supports the treble clef
+                "TREBLE"
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteDuration</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                The duration of each beat of a bar. Must be all uppercase.
+                ("QUARTER", "EIGHTH", "HALF")
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteCount</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The number of beats per bar. Note that the library currently
+                supports [1, 2, 4, 8, 9, 12]
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">editable</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
+                    >boolean</a
+                  >
+                  = <code>true</code>)</code
+                >
+                Show the UI that edits the staff. It is by default set to true.
+              </div>
+            </div>
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a href="https://developer.mozilla.org/docs/Web/API/Element"
+              >element</a
+            ></code
+          >: Returns an HTML element that contains the staff and the UI.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getstaffelement">getStaffElement</h3>
+          </div>
+
+          <p>Get the main DOM element of this staff</p>
+
+          <div class="pre p1 fill-light mt0">
+            getStaffElement():
+            <a href="https://developer.mozilla.org/docs/Web/API/Element"
+              >element</a
+            >
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            ><a href="https://developer.mozilla.org/docs/Web/API/Element"
+              >element</a
+            ></code
+          >: Returns an HTML element that contains the staff and the UI.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getselectednote">getSelectedNote</h3>
+          </div>
+
+          <p>
+            Get the duration and pitch of the currently selected note on the
+            staff.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            getSelectedNote(): [<a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >String</a
+            >,
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >String</a
+            >]
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code
+            >[<a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >String</a
+            >,
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >String</a
+            >]</code
+          >: Returns an array of the duration and pitch of the note.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getallnotes">getAllNotes</h3>
+          </div>
+
+          <p>Get the duration and pitches of all the notes in the staff.</p>
+
+          <div class="pre p1 fill-light mt0">getAllNotes(): []</div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code>[]</code>: Returns an array of arrays, that indicate each bar,
+          that contains the duration and pitches of each note.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="getstaffobject">getStaffObject</h3>
+          </div>
+
+          <p>
+            Get the staff object that contains information about the staff,
+            bars, and notes
+          </p>
+
+          <div class="pre p1 fill-light mt0">getStaffObject(): Staff</div>
+
+          <div class="py1 quiet mt1 prose-big">Returns</div>
+          <code>Staff</code>: The javascript Staff object that represents the
+          staff.
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="changenotepitch">changeNotePitch</h3>
+          </div>
+
+          <p>Change pitch of the note at barIndex, noteIndex to newPitch</p>
+
+          <div class="pre p1 fill-light mt0">
+            changeNotePitch(barIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, noteIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, newPitch:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, responsive: any)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">barIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the bar (starting from 0) that contains the note.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the note (starting from 0) in the bar.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">newPitch</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                The new pitch string of the note in form "{note pitch}{note
+                octave}" As an example "G5" represents the G note in the 5th
+                octave.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">responsive</span>
+                <code class="quiet">(any = <code>false</code>)</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="changenotetimevalue">changeNoteTimeValue</h3>
+          </div>
+
+          <p>
+            Change time value of the note at barIndex, noteIndex to newValue
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            changeNoteTimeValue(barIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, noteIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, newValue:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">barIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the bar (starting from 0) that contains the note.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the note (starting from 0) in the bar.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">newValue</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                The new time value string of the note in all capital letters. As
+                an example "QUARTER", "EIGHTH"
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="changeplaybackspeed">changePlayBackSpeed</h3>
+          </div>
+
+          <p>Change the play back speed in BPM per quarter note.</p>
+
+          <div class="pre p1 fill-light mt0">
+            changePlayBackSpeed(newSpeed:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">newSpeed</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The BPM (of a quarter note). The higher the number, the fast the
+                playback
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="changetimesignature">changeTimeSignature</h3>
+          </div>
+
+          <p>
+            Change the time signature of the staff. Warning: Deletes all of the
+            note in the staff.
+          </p>
+
+          <div class="pre p1 fill-light mt0">
+            changeTimeSignature(noteDuration:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+              >string</a
+            >, noteCount:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteDuration</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String"
+                    >string</a
+                  >)</code
+                >
+                The duration of each beat of a bar. Must be all uppercase.
+                ("QUARTER", "EIGHTH", "HALF")
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteCount</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The number of beats per bar. Note that the library currently
+                supports [1, 2, 4, 8, 9, 12] playback
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="addbar">addBar</h3>
+          </div>
+
+          <p>
+            Add a bar at the end of the staff. Creates a new row in the staff if
+            needed.
+          </p>
+
+          <div class="pre p1 fill-light mt0">addBar()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="removebar">removeBar</h3>
+          </div>
+
+          <p>
+            Remove a bar from the end of the staff. Deletes the last row if
+            there are no bars in it.
+          </p>
+
+          <div class="pre p1 fill-light mt0">removeBar()</div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="playnote">playNote</h3>
+          </div>
+
+          <p>Play a note in a bar.</p>
+
+          <div class="pre p1 fill-light mt0">
+            playNote(barIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, noteIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">barIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the bar (starting from 0) that contains the note.
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">noteIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the note (starting from 0) in the bar.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="playbar">playBar</h3>
+          </div>
+
+          <p>Play an entire bar of the staff.</p>
+
+          <div class="pre p1 fill-light mt0">
+            playBar(barIndex:
+            <a
+              href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+              >number</a
+            >, offset: any)
+          </div>
+
+          <div class="py1 quiet mt1 prose-big">Parameters</div>
+          <div class="prose">
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">barIndex</span>
+                <code class="quiet"
+                  >(<a
+                    href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number"
+                    >number</a
+                  >)</code
+                >
+                The index of the bar (starting from 0).
+              </div>
+            </div>
+
+            <div class="space-bottom0">
+              <div>
+                <span class="code bold">offset</span>
+                <code class="quiet">(any = <code>0</code>)</code>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="p2 mb2 clearfix bg-white minishadow">
+          <div class="clearfix">
+            <h3 class="fl m0" id="playstaff">playStaff</h3>
+          </div>
+
+          <p>Play the entire staff using the speed that is set for the staff</p>
+
+          <div class="pre p1 fill-light mt0">playStaff()</div>
+        </section>
+      </div>
+    </div>
+    <script src="assets/anchor.js"></script>
+    <script src="assets/split.js"></script>
+    <script src="assets/site.js"></script>
+  </body>
+</html>
