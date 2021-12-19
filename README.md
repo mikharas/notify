@@ -1,6 +1,6 @@
 # Landing page
 
-https://csc309-notify.herokuapp.com/examples.html
+https://notify-web.herokuapp.com/examples.html
 
 # Getting started
 
