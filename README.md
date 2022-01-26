@@ -1,4 +1,4 @@
-# Landing page
+# Exanple Page
 
 https://notify-web.herokuapp.com/examples.html
 
