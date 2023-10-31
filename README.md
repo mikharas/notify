@@ -1,4 +1,4 @@
-# Exanple Page
+# Example Page
 
 https://noteify-2585418530f8.herokuapp.com
 
