@@ -1,6 +1,6 @@
 # Exanple Page
 
-https://notify-web.herokuapp.com/examples.html
+https://noteify-2585418530f8.herokuapp.com
 
 # Getting started
 
@@ -60,4 +60,4 @@ staff1.playStaff(0);
 
 # Documentation
 
-[Documentation of notify](pub/documentation.html)
+[Documentation of notify](https://noteify-2585418530f8.herokuapp.com/documentation.html)
